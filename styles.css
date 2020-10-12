@@ -1,0 +1,19 @@
+body { 
+    background: url(imgs/sebastien-marchand-NAs5-bHR-JA-unsplash.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#landing{
+    width: 100%;
+    font-family: 'Dancing Script', cursive;
+}
+
+#landing-logo{
+    color: rgb(245, 13, 13);
+    margin-top: 20%;
+    font-size: 500%;
+    font-family: 'Sansita Swashed', cursive;
+}
