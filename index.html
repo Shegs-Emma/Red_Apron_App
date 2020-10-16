@@ -7,17 +7,25 @@
         <title>Red Apron</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Dancing+Script:wght@700&family=Sansita+Swashed:wght@800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="styles.css">
     </head>
 
-    <body>
+    <body id="main-body">
         <div id="landing" class="container">
             <div class="row ml-auto mt-3">
-                <a href="#" class="btn btn-primary ml-auto">Register</a>
-                <a href="#" class="btn btn-danger ml-3">Log In</a>
+                <a href="./auth/signup.html" class="btn btn-primary ml-auto">Register</a>
+                <a href="./auth/login.html" class="btn btn-danger ml-3">Log In</a>
             </div>
             <div id="landing-logo" class="row">
                 <span class="ml-auto"> RED APRON </span>
@@ -25,7 +33,28 @@
             
         </div>
         
+        
 
+        <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            var firebaseConfig = {
+                apiKey: "AIzaSyDtO55WRN8yVOX5EYZIrtm7GBVp7i24fws",
+                authDomain: "red-apron-72457.firebaseapp.com",
+                databaseURL: "https://red-apron-72457.firebaseio.com",
+                projectId: "red-apron-72457",
+                storageBucket: "red-apron-72457.appspot.com",
+                messagingSenderId: "767826432093",
+                appId: "1:767826432093:web:c9c12e1d38d4b37dd23db4",
+                measurementId: "G-DJEB28BW3K"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+
+            const db = firebase.firestore();
+            db.settings({ timestampsInSnapshots: true });
+        </script>
         <script src="https://code.jquery.com/jquery-3.5.1.js"
             integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <script src="script.js"></script>

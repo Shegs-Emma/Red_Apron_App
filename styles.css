@@ -1,4 +1,5 @@
-body { 
+/* ==========================Landing Page styles========================================= */
+#main-body { 
     background: url(imgs/sebastien-marchand-NAs5-bHR-JA-unsplash.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -8,12 +9,205 @@ body {
 
 #landing{
     width: 100%;
-    font-family: 'Dancing Script', cursive;
 }
+
 
 #landing-logo{
     color: rgb(245, 13, 13);
     margin-top: 20%;
     font-size: 500%;
     font-family: 'Sansita Swashed', cursive;
+}
+
+/* =================================== SignUp and Login Styles ================================== */
+
+body{
+    background-color: white;
+}
+
+#myLogo{
+    width: 10%;
+    border-radius: 40%;
+}
+
+#navBar{
+    background-color: black;
+    margin-bottom: 5%;
+}
+
+
+section{
+    width: 50%;
+    padding: 20px 20px;
+    border-radius: 2px;
+    background-color: whitesmoke;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50%;
+    padding: 5px 5px;
+    border-radius: 5px;
+    background-color: gray;
+    color: wheat;
+}
+
+
+/* ============================ Recipes Styles ================================*/
+#navItems{
+    color: white;
+}
+
+.navItems{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#recipes-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
+    padding: 5px 5px;
+    border-radius: 5px;
+    background-color: gray;
+    color: wheat;
+}
+
+#recipes-section{
+    width: 90%;
+    padding: 20px 20px;
+    border-radius: 2px;
+}
+
+#recipes-section-single{
+    width: 90%;
+    padding: 20px 20px;
+    border-radius: 2px;
+    background-color: white;
+}
+
+
+.singleRecipe{
+    width: 5%;
+}
+
+.singleRecipe img{
+    width: 100%;
+}
+
+#recipesRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.card-body{
+    background-color: wheat;
+}
+
+small{
+    font-family: 'Julee', cursive;
+}
+
+/* ====================== SHow RECIPE ====================================================================*/
+
+svg{
+    margin-right: 10px;
+}
+
+#ingreCol{
+    text-align: center;
+    background-color: wheat;
+    border-radius: 5%;
+}
+
+#resDesc{
+    background-color: wheat;
+    border-radius: 5%;
+    text-align: center;
+}
+
+#resDesc p, div{
+    text-align: justify;
+}
+
+#ingreCol div{
+    text-align: justify;
+}
+
+#descCol{
+    text-align: center;
+}
+
+#descCol div{
+    text-align: justify;
+}
+
+h2, h4{
+    font-family: 'Sansita Swashed', cursive;
+}
+
+h4{
+    color: rgb(235, 81, 47);
+}
+
+p, a{
+    font-family: 'Julee', cursive;
+    color: grey;
+}
+
+.reciSpan{
+    font-family: 'Julee', cursive;
+    color: grey;
+}
+
+small{
+    color: grey;
+}
+
+#footerMi{
+    font-family: 'Julee', cursive;
+    color: whitesmoke;
+}
+
+span img{
+    width: 3%;
+}
+
+.logos{
+    position: relative;
+    left: 70%;
+    
+}
+
+.logos img{
+    margin-right: 2%;
+}
+
+/* ======================================================== Add Recipe Styles ========================================== */
+#left-section{
+    border-left: 2px solid wheat;
+    border-right: 2px solid wheat;
+}
+
+#left-section button{
+    width: 100%;
+    display: block;
+}
+
+#left-section h4{
+    width: 100%;
+    display: block;
+    color: wheat;
+}
+
+label{
+    font-family: 'Sansita Swashed', cursive;
+    color: grey;
+    font-size: large;
 }
