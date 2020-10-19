@@ -57,13 +57,13 @@
     <section class="container-fluid mr-auto ml-auto" id="recipes-section">
         <div class="row" id="recipeRow">
             <div class="col-md-4 col-12 mt-3" id="left-section">
-                <div><button class="btn btn-secondary mb-5 mt-5">
+                <div><button class="btn btn-secondary mb-5 mt-5" id="addDesc">
                         <h4>Description</h4>
                     </button></div>
-                <div><button class="btn btn-secondary mb-5">
+                <div><button class="btn btn-secondary mb-5" id="addIngr">
                         <h4>Ingredients</h4>
                     </button></div>
-                <div><button class="btn btn-secondary mb-5">
+                <div><button class="btn btn-secondary mb-5" id="addDirect">
                         <h4>Direction</h4>
                     </button></div>
             </div>
@@ -135,7 +135,7 @@
                 </form> -->
 
                 <!-- =============================================== FOR RECIPE DESCRIPTION =================================================== -->
-                <form class="row">
+                <!-- <form class="row">
                     <label class="ml-4">Please fill the direction to prepare in the three (3) boxes....</label>
                     <div class="form-group col-12">
                         <textarea class="form-control directionBox"></textarea>
@@ -148,14 +148,15 @@
                     </div>
                     
                     <button type="submit" class="btn btn-info mr-auto ml-auto">Save</button>
-                </form>
+                </form> -->
             </div>
         </div>
 
     </section>
 
     <footer class="container mt-5 mb-5">
-        <a href="./recipes.html" class="btn btn-danger">
+        <!-- <a href="./recipes.html" class="btn btn-danger"> -->
+        <a href="#" class="btn btn-danger" id="submit-recipe">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -176,6 +177,8 @@
             authDomain: "red-apron-72457.firebaseapp.com",
             databaseURL: "https://red-apron-72457.firebaseio.com",
             projectId: "red-apron-72457",
+            storageBucket: "red-apron-72457.appspot.com",
+            messagingSenderId: "767826432093",
             appId: "1:767826432093:web:c9c12e1d38d4b37dd23db4",
             measurementId: "G-DJEB28BW3K"
         };
@@ -201,8 +204,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
         </script>
-    <script src="../scripts/auth.js"></script>
-    <script src="../scripts/script.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 </html>
