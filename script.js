@@ -63,19 +63,19 @@ $(function () {
         }
 
         static createRecipe(recipeDes, recipeIng, recipeDir) {
-            let newRecipe = new Recipe(recipeDes, recipeIng, recipeDir);
+            // let newRecipe = new Recipe(recipeDes, recipeIng, recipeDir);
 
             db.collection("recipes").doc(GenRandom.Job()).set({
                 recipeDescription:{
-                    cookTime: 12,
-                    prepTime: 23,
-                    recipeDesc: 'So gonna work',
-                    recipeImgAddr: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-                    recipeName: 'Lime Aile',
-                    serve: 12
+                    cookTime: recipeDes.cookTime,
+                    prepTime: recipeDes.prepTime,
+                    recipeDesc: recipeDes.recipeDes,
+                    recipeImgAddr: recipeDes.recipeImgAddr,
+                    recipeName: recipeDes.recipeName,
+                    serve: recipeDes.serve
                 },
-                recipeDirection: ['left', 'right'],
-                recipeIngredients: ['Lime', 'oil', 'egusi', 'dollarz']
+                recipeDirection: recipeDir.map( dir => dir),
+                recipeIngredients: recipeIng.map( recipe => recipe)
             })
             .then(function() {
                 console.log("Document successfully written!");
@@ -83,11 +83,7 @@ $(function () {
             .catch(function(error) {
                 console.error("Error writing document: ", error);
             });
-
-            console.log(newRecipe);
         }
-
-        
     };
 
     // ==================================================================== Add Recipe Event Handlers ======================================

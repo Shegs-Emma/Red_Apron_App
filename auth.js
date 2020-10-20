@@ -1,6 +1,6 @@
 $(function () {
 
-    // ========================================= Get Data =============================================
+    // ================================================================== Get Data =================================================================
 
     // ************************ Extract From Cloud ****************************************************
 
@@ -12,27 +12,29 @@ $(function () {
 
     const seperator = (data) => {
         let myRecipes = [];
+        let recipeID = [];
         data.forEach((doc) => {
             myRecipes.push(doc.data());
-            console.log(doc.id);
+            recipeID.push(doc.id);
         });
+
+
+        console.log(recipeID);
 
         let seperatedRecipes = myRecipes.map(recipe => {
             return recipe;
         });
 
-        seperatedRecipes.forEach(item => {
-            displayRecipe(item);
+        seperatedRecipes.forEach((item, index) => {
+            displayRecipe(item, recipeID[index]);
         });
     }
 
     // ***************************** Display Seperately ****************************************************
-    const displayRecipe = (data) => {
+    const displayRecipe = (data, dataID) => {
         var $recipeRow = $('#recipesRow');
 
         var $recipeDiv = $('<div>');
-
-        let html;
 
         let ingredients = [];
         let directions = [];
@@ -49,23 +51,60 @@ $(function () {
             }
         };
 
-        html = `<div class="card mt-3" style="width: 18rem;">
-                    <img src="${description.recipeImgAddr}"
-                        class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h4 class="card-title">${description.recipeName}</h4>
-                        <p class="card-text"><small>EmmyM_ighty</small></p>
-                        <a href="./showRecipe.html" class="btn btn-danger">View Recipe</a>
-                    </div>
-                </div>`;
+        var $mainDiv = $('<div>', {
+            css: {
+                width: '18rem'
+            }
+        });
+        $mainDiv.addClass('card mt-3');
 
-        $recipeDiv.append(html);
+        var $image = $('<img>');
+        $image.attr('src', description.recipeImgAddr);
+        $image.addClass('card-img-top');
+
+        var $innerDiv = $('<div>');
+        $innerDiv.addClass('card-body');
+
+        var $rName = $('<h4>');
+        $rName.addClass('card-title');
+        $rName.text(description.recipeName);
+
+        var $rAuthor = $('<p>');
+        $rAuthor.addClass('card-text');
+        $rAuthor.html('<small>EmmyM_ighty</small>');
+
+        var $rLink = $('<a>');
+        $rLink.addClass('btn btn-danger');
+        $rLink.text('View Recipe');
+        $rLink.attr('id', dataID);
+
+        $mainDiv.append($image);
+        $innerDiv.append($rName);
+        $innerDiv.append($rAuthor);
+        $innerDiv.append($rLink);
+
+        $mainDiv.append($innerDiv);
+
+
+        $recipeDiv.append($mainDiv);
 
         $recipeRow.append($recipeDiv);
+
+
+        var $thatButton = $('#'+dataID);
+        $thatButton.on('click', () => {
+            showSingle(data, dataID);
+        });
+        
+        
     }
 
+    // ================================================================= Show Single Recipe =================================================== 
+    const showSingle = (data, id) => {
+        console.log(id);
+    }
 
-    // ============================== Listen for Auth Status change ==================================
+    // ================================================================== Listen for Auth Status change ========================================
     auth.onAuthStateChanged(user => {
         if (user) {
             console.log('User logged in:', user);
