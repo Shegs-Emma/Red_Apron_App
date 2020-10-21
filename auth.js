@@ -1,32 +1,39 @@
 $(function () {
-
-    // ================================================================== Get Data =================================================================
-
-    // ************************ Extract From Cloud ****************************************************
-
-    db.collection("recipes").get().then((querySnapshot) => {
-
-        seperator(querySnapshot);
-        showSingle(querySnapshot);
+    // ================================================================== Listen for Auth Status change ========================================
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            // ************************ Extract From Cloud ****************************************************
+            db.collection("recipes").onSnapshot((querySnapshot) => {
+                seperator(querySnapshot);
+                showSingle(querySnapshot);
+            });
+        } else {
+            seperator([]);
+            showSingle([]);
+        }
     });
 
     // ************************ Seperate Them **********************************************************
 
     const seperator = (data) => {
-        let myRecipes = [];
-        let recipeID = [];
-        data.forEach((doc) => {
-            myRecipes.push(doc.data());
-            recipeID.push(doc.id);
-        });
+        if (data.length !== 0) {
+            let myRecipes = [];
+            let recipeID = [];
+            data.forEach((doc) => {
+                myRecipes.push(doc.data());
+                recipeID.push(doc.id);
+            });
 
-        let seperatedRecipes = myRecipes.map(recipe => {
-            return recipe;
-        });
+            let seperatedRecipes = myRecipes.map(recipe => {
+                return recipe;
+            });
 
-        seperatedRecipes.forEach((item, index) => {
-            displayRecipe(item, recipeID[index]);
-        });
+            seperatedRecipes.forEach((item, index) => {
+                displayRecipe(item, recipeID[index]);
+            });
+        } else {
+            
+        }
     }
 
     // ***************************** Display Seperately ****************************************************
@@ -103,26 +110,29 @@ $(function () {
 
     // ================================================================= Show Single Recipe =================================================== 
     const showSingle = (data) => {
-        var chosen = JSON.parse(localStorage.getItem('recipe'));
-        let recipeId = [];
-        data.forEach((doc) => {
-            recipeId.push(doc.id);
-        });
-
-        var recipeID = recipeId.filter(id => {
-            return id === chosen.dataID
-        });
-
-        if (recipeID) {
-            db.collection("recipes").doc(recipeID.join()).get().then((querySnapshot) => {
-                var myRecipe = querySnapshot.data();
-                let myRecipeDesc = myRecipe.recipeDescription;
-                let myRecipeIng = myRecipe.recipeIngredients;
-                let myRecipeDir = myRecipe.recipeDirection;
-
-                creator(myRecipeDesc, myRecipeIng, myRecipeDir);
+        if (data.length !== 0) {
+            var chosen = JSON.parse(localStorage.getItem('recipe'));
+            let recipeId = [];
+            data.forEach((doc) => {
+                recipeId.push(doc.id);
             });
+
+            var recipeID = recipeId.filter(id => {
+                return id === chosen.dataID
+            });
+
+            if (recipeID) {
+                db.collection("recipes").doc(recipeID.join()).get().then((querySnapshot) => {
+                    var myRecipe = querySnapshot.data();
+                    let myRecipeDesc = myRecipe.recipeDescription;
+                    let myRecipeIng = myRecipe.recipeIngredients;
+                    let myRecipeDir = myRecipe.recipeDirection;
+
+                    creator(myRecipeDesc, myRecipeIng, myRecipeDir);
+                });
+            }
         }
+
     }
 
     // ============================================= Construct the Recipe ======================================================
@@ -142,9 +152,9 @@ $(function () {
 
         let $recTime = `${des.cookTime} mins to prepare and ${des.prepTime} mins to cook`;
         let $recServe = `Serves ${des.serve}`;
-        let $recIngr = `${ing.map( ingI => '<p class="mt-0 mb-0 ml-5">'+ingI+'</p>')}`;
-        let $recDir = `${dir.map( dirI => '<p class="mt-0 mb-0 ml-5">'+dirI+'</p>')}`;
-        
+        let $recIngr = `${ing.map(ingI => '<p class="mt-0 mb-0 ml-5">' + ingI + '</p>')}`;
+        let $recDir = `${dir.map(dirI => '<p class="mt-0 mb-0 ml-5">' + dirI + '</p>')}`;
+
         $('#recipes-header').html($recHeader);
         $('#imageSpace').html($recImg);
         $('#ds').text($recDes);
@@ -153,15 +163,6 @@ $(function () {
         $('#ourIng').html($recIngr);
         $('#ourDir').html($recDir);
     };
-
-    // ================================================================== Listen for Auth Status change ========================================
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            console.log('User logged in:', user);
-        } else {
-            console.log('user logged out!');
-        }
-    });
 
     // ======================================= Sign up ===================================
     const $signUp = $('#signup-form');
@@ -209,7 +210,23 @@ $(function () {
             $('#loginEmail').val('');
             $('#loginPass').val('');
             window.location.href = "../recipe/recipes.html";
-        })
-    })
+        }).catch( err => {
+            showAlert("That User doesn't else. Please sign up.", 'danger');
+        });
+    });
+
+    // The show alert function
+    function showAlert(message, className){
+        let $alertDiv = $('<div>');
+        $alertDiv.addClass('alert alert-'+className);
+        $alertDiv.append(document.createTextNode(message));
+
+        let $myForm = $('#login-form');
+
+        $myForm.prepend($alertDiv);
+
+        // Disappear in 2 seconds
+        setTimeout(() => $('.alert').remove(), 2000);
+    };
 
 });
