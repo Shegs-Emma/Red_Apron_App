@@ -5,7 +5,9 @@ $(function () {
     // ************************ Extract From Cloud ****************************************************
 
     db.collection("recipes").get().then((querySnapshot) => {
+
         seperator(querySnapshot);
+        showSingle(querySnapshot);
     });
 
     // ************************ Seperate Them **********************************************************
@@ -17,9 +19,6 @@ $(function () {
             myRecipes.push(doc.data());
             recipeID.push(doc.id);
         });
-
-
-        console.log(recipeID);
 
         let seperatedRecipes = myRecipes.map(recipe => {
             return recipe;
@@ -77,6 +76,7 @@ $(function () {
         $rLink.addClass('btn btn-danger');
         $rLink.text('View Recipe');
         $rLink.attr('id', dataID);
+        $rLink.attr('href', './showRecipe.html');
 
         $mainDiv.append($image);
         $innerDiv.append($rName);
@@ -91,18 +91,68 @@ $(function () {
         $recipeRow.append($recipeDiv);
 
 
-        var $thatButton = $('#'+dataID);
+        var $thatButton = $('#' + dataID);
         $thatButton.on('click', () => {
-            showSingle(data, dataID);
+            var myInfo = {
+                data,
+                dataID
+            };
+            localStorage.setItem('recipe', JSON.stringify(myInfo));
         });
-        
-        
     }
 
     // ================================================================= Show Single Recipe =================================================== 
-    const showSingle = (data, id) => {
-        console.log(id);
+    const showSingle = (data) => {
+        var chosen = JSON.parse(localStorage.getItem('recipe'));
+        let recipeId = [];
+        data.forEach((doc) => {
+            recipeId.push(doc.id);
+        });
+
+        var recipeID = recipeId.filter(id => {
+            return id === chosen.dataID
+        });
+
+        if (recipeID) {
+            db.collection("recipes").doc(recipeID.join()).get().then((querySnapshot) => {
+                var myRecipe = querySnapshot.data();
+                let myRecipeDesc = myRecipe.recipeDescription;
+                let myRecipeIng = myRecipe.recipeIngredients;
+                let myRecipeDir = myRecipe.recipeDirection;
+
+                creator(myRecipeDesc, myRecipeIng, myRecipeDir);
+            });
+        }
     }
+
+    // ============================================= Construct the Recipe ======================================================
+    const creator = (des, ing, dir) => {
+
+        let $recHeader = `
+            <span id="recipeSpan">
+                <h2>${des.recipeName}</h2>
+            </span>
+        `;
+
+        let $recImg = `
+            <img src=${des.recipeImgAddr} class="card-img-top" alt="recipeIMG">
+        `;
+
+        let $recDes = `${des.recipeDesc}`;
+
+        let $recTime = `${des.cookTime} mins to prepare and ${des.prepTime} mins to cook`;
+        let $recServe = `Serves ${des.serve}`;
+        let $recIngr = `${ing.map( ingI => '<p class="mt-0 mb-0 ml-5">'+ingI+'</p>')}`;
+        let $recDir = `${dir.map( dirI => '<p class="mt-0 mb-0 ml-5">'+dirI+'</p>')}`;
+        
+        $('#recipes-header').html($recHeader);
+        $('#imageSpace').html($recImg);
+        $('#ds').text($recDes);
+        $('#time').text($recTime);
+        $('#serve').text($recServe);
+        $('#ourIng').html($recIngr);
+        $('#ourDir').html($recDir);
+    };
 
     // ================================================================== Listen for Auth Status change ========================================
     auth.onAuthStateChanged(user => {
@@ -120,7 +170,7 @@ $(function () {
         e.preventDefault();
 
         // Get User Information
-        const $userName = $('#uname').val();
+        // const $userName = $('#uname').val();
         const $email = $('#email').val();
         const $password = $('#pword').val();
 
