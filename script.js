@@ -15,30 +15,30 @@ $(function () {
             this.recipeDirection = recipeDirection;
         }
     };
-     //This code will generate the random numbers for the id needed for deletion
-     var GenRandom =  {
+    //This code will generate the random numbers for the id needed for deletion
+    var GenRandom = {
 
         Stored: [],
-    
-        Job: function(){
+
+        Job: function () {
             var newId = Date.now().toString().substr(6); // or use any method that you want to achieve this string
-    
-            if( this.Check(newId) ){
+
+            if (this.Check(newId)) {
                 this.Job();
             }
-    
+
             this.Stored.push(newId);
             return newId; // or store it in sql database or whatever you want
-    
+
         },
-    
-        Check: function(id){
-            for( var i = 0; i < this.Stored.length; i++ ){
-                if( this.Stored[i] == id ) return true;
+
+        Check: function (id) {
+            for (var i = 0; i < this.Stored.length; i++) {
+                if (this.Stored[i] == id) return true;
             }
             return false;
         }
-    
+
     };
 
 
@@ -64,24 +64,31 @@ $(function () {
 
         static createRecipe(recipeDes, recipeIng, recipeDir) {
             // let newRecipe = new Recipe(recipeDes, recipeIng, recipeDir);
-
-            db.collection("recipes").doc(GenRandom.Job()).set({
-                recipeDescription:{
-                    cookTime: recipeDes.cookTime,
-                    prepTime: recipeDes.prepTime,
-                    recipeDesc: recipeDes.recipeDes,
-                    recipeImgAddr: recipeDes.recipeImgAddr,
-                    recipeName: recipeDes.recipeName,
-                    serve: recipeDes.serve
-                },
-                recipeDirection: recipeDir.map( dir => dir),
-                recipeIngredients: recipeIng.map( recipe => recipe)
-            })
-            .then(function() {
-                console.log("Document successfully written!");
-            })
-            .catch(function(error) {
-                console.error("Error writing document: ", error);
+            auth.onAuthStateChanged(user => {
+                let recipeAuthor;
+                if (user) {
+                    db.collection('users').doc(user.uid).get().then(doc => {
+                        recipeAuthor = doc.data().userName;
+                    }).then(() => {
+                        db.collection("recipes").doc(GenRandom.Job()).set({
+                            recipeDescription: {
+                                cookTime: recipeDes.cookTime,
+                                prepTime: recipeDes.prepTime,
+                                recipeDesc: recipeDes.recipeDes,
+                                recipeImgAddr: recipeDes.recipeImgAddr,
+                                recipeName: recipeDes.recipeName,
+                                serve: recipeDes.serve
+                            },
+                            recipeDirection: recipeDir.map(dir => dir),
+                            recipeIngredients: recipeIng.map(recipe => recipe),
+                            author: recipeAuthor
+                        }).then(function () {
+                            console.log("Document successfully written!");
+                        }).catch(function (error) {
+                            console.error("Error writing document: ", error);
+                        });
+                    })
+                }
             });
         }
     };
@@ -224,7 +231,7 @@ $(function () {
 
             const $section = $('#right-section');
             $section.empty();
-            
+
             $('#addDirect').attr('disabled', false);
         });
     });
@@ -282,14 +289,28 @@ $(function () {
     $submitRecipe.on('click', (e) => {
         e.preventDefault();
 
-        if(recipeDesc && recipeIngr && recipeDirec){
+        if (recipeDesc && recipeIngr && recipeDirec) {
             UI.createRecipe(recipeDesc, recipeIngr, recipeDirec);
+            showAlert("Recipe Added Succesfully. Please visit Recipes Page", "success");
         }
     });
 
 
 
 
-    // =========================================================== All About Showing the Recipe =====================================
-    
+    // =========================================================== All About Showing Alerts =====================================
+    // The show alert function
+    function showAlert(message, className){
+        let $alertDiv = $('<div>');
+        $alertDiv.addClass('alert alert-'+className);
+        $alertDiv.append(document.createTextNode(message));
+
+        let $add = $('#navBar');
+
+        $add.append($alertDiv);
+
+        // Disappear in 2 seconds
+        setTimeout(() => $('.alert').remove(), 2000);
+    };
+
 });

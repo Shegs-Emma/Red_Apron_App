@@ -54,6 +54,7 @@ $(function () {
         let ingredients = [];
         let directions = [];
         let description = {};
+        let author = [];
 
         for (recipePart in data) {
 
@@ -63,6 +64,8 @@ $(function () {
                 directions = data[recipePart];
             } else if (recipePart === 'recipeDescription') {
                 description = data[recipePart];
+            } else if (recipePart === 'author') {
+                author = data[recipePart];
             }
         };
 
@@ -86,7 +89,7 @@ $(function () {
 
         var $rAuthor = $('<p>');
         $rAuthor.addClass('card-text');
-        $rAuthor.html('<small>EmmyM_ighty</small>');
+        $rAuthor.html(`<small>Created By: ${author}</small>`);
 
         var $rLink = $('<a>');
         $rLink.addClass('btn btn-danger');
