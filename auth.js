@@ -1,13 +1,22 @@
 $(function () {
     // ================================================================== Listen for Auth Status change ========================================
+    var $welcomeMessage = $('.welcomeMessage');
+
     auth.onAuthStateChanged(user => {
         if (user) {
+            db.collection('users').doc(user.uid).get().then( doc => {
+                $welcomeMessage.text(`Logged in as ${doc.data().userName}`);
+            });
             // ************************ Extract From Cloud ****************************************************
-            db.collection("recipes").onSnapshot((querySnapshot) => {
-                seperator(querySnapshot);
-                showSingle(querySnapshot);
+            db.collection("recipes").onSnapshot( snapshot => {
+                seperator(snapshot);
+                showSingle(snapshot);
+            }, err => {
+                console.log(err.message);
             });
         } else {
+            $welcomeMessage.text('');
+
             seperator([]);
             showSingle([]);
         }
@@ -171,12 +180,16 @@ $(function () {
         e.preventDefault();
 
         // Get User Information
-        // const $userName = $('#uname').val();
+        const $userName = $('#uname').val();
         const $email = $('#email').val();
         const $password = $('#pword').val();
 
         // Sign up the User
-        auth.createUserWithEmailAndPassword($email, $password).then((cred) => {
+        auth.createUserWithEmailAndPassword($email, $password).then( cred => {
+            return db.collection("users").doc(cred.user.uid).set({
+                userName: $userName
+            })     
+        }).then(() => {
             $('#uname').val('');
             $('#email').val('');
             $('#pword').val('');
