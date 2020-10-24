@@ -198,7 +198,7 @@ $(function () {
             $('#pword').val('');
             window.location.href = "../recipe/recipes.html";
         }).catch((error) => {
-            console.log(error);
+            showAlert(error.message, 'danger', $('#signup-form'));
         });
     });
 
@@ -227,22 +227,21 @@ $(function () {
             $('#loginPass').val('');
             window.location.href = "../recipe/recipes.html";
         }).catch( err => {
-            showAlert("That User doesn't else. Please sign up.", 'danger');
+            showAlert(err.message, 'danger', $('#login-form'));
         });
     });
 
     // The show alert function
-    function showAlert(message, className){
+    function showAlert(message, className, location){
         let $alertDiv = $('<div>');
         $alertDiv.addClass('alert alert-'+className);
         $alertDiv.append(document.createTextNode(message));
 
-        let $myForm = $('#login-form');
+        let $add = location;
 
-        $myForm.prepend($alertDiv);
+        $add.prepend($alertDiv);
 
         // Disappear in 2 seconds
-        setTimeout(() => $('.alert').remove(), 2000);
+        setTimeout(() => $('.alert').remove(), 3000);
     };
-
 });

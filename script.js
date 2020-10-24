@@ -6,6 +6,7 @@ $(function () {
 
     $('#addIngr').attr('disabled', true);
     $('#addDirect').attr('disabled', true);
+    $('#submit-recipe').attr('disabled', true);
 
     // ================================================================= Recipe Class Declaration =========================================
     class Recipe {
@@ -84,8 +85,14 @@ $(function () {
                             author: recipeAuthor
                         }).then(function () {
                             console.log("Document successfully written!");
+                            showAlert("Recipe Submitted Succesfully!", "success", $('#recipes-section'));
+
+                            setTimeout(function(){
+                                window.location.href = "./recipes.html";
+                            }, 4000)
                         }).catch(function (error) {
                             console.error("Error writing document: ", error);
+                            showAlert("Error Submitting Recipe!", "danger", $('#recipes-section'));
                         });
                     })
                 }
@@ -100,27 +107,27 @@ $(function () {
         let descHtml = `<form class="row" id="saveDescription">
             <div class="form-group col-12">
                 <label for="recipeName">Recipe Name</label>
-                <input type="text" class="form-control" id="recipeName" />
+                <input type="text" class="form-control" id="recipeName" required />
             </div>
             <div class="form-group col-12">
                 <label for="recipeImage">Recipe Image Address</label>
-                <input type="text" class="form-control" id="recipeImage"/>
+                <input type="text" class="form-control" id="recipeImage" required />
             </div>
             <div class="form-group col-12">
                 <label class="form-check-label" for="recipeDesc">Recipe Description</label>
-                <textarea id="recipeDesc" class="form-control"></textarea>
+                <textarea id="recipeDesc" class="form-control" required></textarea>
             </div>
             <div class="form-group col-md-4 col-12">
                 <label for="prepTime">Minutes To Prepare</label>
-                <input type="number" class="form-control" id="prepTime"/>
+                <input type="number" class="form-control" id="prepTime" required />
             </div>
             <div class="form-group col-md-4 col-12">
                 <label for="cookTime">Minutes To Cook</label>
-                <input type="number" class="form-control" id="cookTime"/>
+                <input type="number" class="form-control" id="cookTime" required />
             </div>
             <div class="form-group col-md-4 col-12">
                 <label for="serve">Number of Servings</label>
-                <input type="number" class="form-control" id="serve"/>
+                <input type="number" class="form-control" id="serve" required />
             </div>
             <button type="submit" class="btn btn-primary mr-auto ml-auto" >Save</button>
         </form>`;
@@ -161,6 +168,7 @@ $(function () {
 
             const $section = $('#right-section');
             $section.empty();
+            showAlert("Recipe Description Saved!", "success", $('#recipes-section'));
 
             $('#addIngr').attr('disabled', false);
         });
@@ -172,16 +180,16 @@ $(function () {
         let ingreHtml = `<form class="row" id="saveIngredients">
             <label class="ml-4">Please Input The Recipe Ingredients, One per Input box.....</label>
             <div class="form-group col-12">
-                <input type="text" class="form-control ingredientsBox" />
+                <input type="text" class="form-control ingredientsBox" required />
             </div>
             <div class="form-group col-12">
-                <input type="text" class="form-control ingredientsBox" />
+                <input type="text" class="form-control ingredientsBox" required />
             </div>
             <div class="form-group col-12">
-                <input type="text" class="form-control ingredientsBox" />
+                <input type="text" class="form-control ingredientsBox" required />
             </div>
             <div class="form-group col-12">
-                <input type="text" class="form-control ingredientsBox" />
+                <input type="text" class="form-control ingredientsBox" required />
             </div>
             <div class="form-group col-12">
                 <input type="text" class="form-control ingredientsBox" />
@@ -231,6 +239,7 @@ $(function () {
 
             const $section = $('#right-section');
             $section.empty();
+            showAlert("Recipe Ingredients Saved!", "success", $('#recipes-section'));
 
             $('#addDirect').attr('disabled', false);
         });
@@ -242,7 +251,7 @@ $(function () {
         let directHtml = `<form class="row" id="saveDirection">
             <label class="ml-4">Please fill the direction to prepare in the three (3) boxes....</label>
             <div class="form-group col-12">
-                <textarea class="form-control directionBox"></textarea>
+                <textarea class="form-control directionBox" required></textarea>
             </div>
             <div class="form-group col-12">
                 <textarea class="form-control directionBox"></textarea>
@@ -281,6 +290,9 @@ $(function () {
 
             const $section = $('#right-section');
             $section.empty();
+            showAlert("Recipe Direction Saved!", "success", $('#recipes-section'));
+
+            $('#submit-recipe').attr('disabled', false);
         });
     });
 
@@ -291,7 +303,7 @@ $(function () {
 
         if (recipeDesc && recipeIngr && recipeDirec) {
             UI.createRecipe(recipeDesc, recipeIngr, recipeDirec);
-            showAlert("Recipe Added Succesfully. Please visit Recipes Page", "success");
+            $('#submit-recipe').attr('disabled', true);
         }
     });
 
@@ -300,17 +312,17 @@ $(function () {
 
     // =========================================================== All About Showing Alerts =====================================
     // The show alert function
-    function showAlert(message, className){
+    function showAlert(message, className, location){
         let $alertDiv = $('<div>');
         $alertDiv.addClass('alert alert-'+className);
         $alertDiv.append(document.createTextNode(message));
 
-        let $add = $('#navBar');
+        let $add = location;
 
-        $add.append($alertDiv);
+        $add.prepend($alertDiv);
 
         // Disappear in 2 seconds
-        setTimeout(() => $('.alert').remove(), 2000);
+        setTimeout(() => $('.alert').remove(), 3000);
     };
 
 });

@@ -11,6 +11,9 @@
     width: 100%;
 }
 
+.link{
+    font-family: 'Julee', cursive;
+}
 
 #landing-logo{
     color: rgb(245, 13, 13);
@@ -26,18 +29,25 @@ body{
 }
 
 #myLogo{
-    width: 10%;
-    border-radius: 40%;
+    width: 20%;
+    border-radius: 10%;
 }
 
 #navBar{
-    background-color: black;
     margin-bottom: 5%;
 }
 
+#myLogoFooter{
+    width: 20%;
+    margin-left: 40%;
+}
+
+#main_footer{
+    margin-top: 10%;
+}
 
 section{
-    width: 50%;
+    width: 30%;
     padding: 20px 20px;
     border-radius: 2px;
     background-color: whitesmoke;
@@ -47,17 +57,20 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 50%;
+    width: 30%;
     padding: 5px 5px;
     border-radius: 5px;
     background-color: gray;
     color: wheat;
+    font-family: 'Sansita Swashed', cursive;
+    font-size: x-large;
 }
 
 
 /* ============================ Recipes Styles ================================*/
-#navItems{
-    color: white;
+.betterDisplay{
+    width: 100%;
+    height: 50%;
 }
 
 .navItems{
@@ -144,12 +157,11 @@ svg{
 
 #ingreCol{
     text-align: center;
-    background-color: wheat;
     border-radius: 5%;
 }
 
 #resDesc{
-    background-color: wheat;
+    background-color: white;
     border-radius: 5%;
     text-align: center;
 }
@@ -163,7 +175,10 @@ svg{
 }
 
 #descCol{
+    background-color: wheat;
     text-align: center;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 #descCol div{
@@ -202,12 +217,17 @@ span img{
 }
 
 .logos{
-    position: relative;
-    left: 70%;
-    
+    display: block;
+    margin-left: 40%;
+    margin-bottom: 5%;
 }
 
-.logos img{
+hr{
+    border: 1px solid red;
+    margin-top: 10%;
+}
+
+.logos span{
     margin-right: 2%;
 }
 
