@@ -37,17 +37,12 @@ body{
     margin-bottom: 5%;
 }
 
-#myLogoFooter{
-    width: 20%;
-    margin-left: 40%;
-}
-
 #main_footer{
     margin-top: 10%;
 }
 
 section{
-    width: 30%;
+    width: 50%;
     padding: 20px 20px;
     border-radius: 2px;
     background-color: whitesmoke;
@@ -57,7 +52,7 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 30%;
+    width: 50%;
     padding: 5px 5px;
     border-radius: 5px;
     background-color: gray;
@@ -68,11 +63,6 @@ header{
 
 
 /* ============================ Recipes Styles ================================*/
-.betterDisplay{
-    width: 100%;
-    height: 50%;
-}
-
 .navItems{
     width: 70%;
     display: flex;
@@ -216,12 +206,6 @@ span img{
     width: 3%;
 }
 
-.logos{
-    display: block;
-    margin-left: 40%;
-    margin-bottom: 5%;
-}
-
 hr{
     border: 1px solid red;
     margin-top: 10%;
@@ -252,4 +236,52 @@ label{
     font-family: 'Sansita Swashed', cursive;
     color: grey;
     font-size: large;
+}
+
+
+/* ======================================================== Footer Styles ============================================ */
+
+#myLogoFooter{
+    width: 20%;
+    margin-left: 40%;
+}
+
+
+.logos{
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+/* ======================================================== Responsiveness ================================================ */
+@media(max-width: 767px){
+    #myLogoFooter{
+        width: 50%;
+        margin-left: 25%;
+    }
+    
+    
+    .logos{
+        text-align: center;
+        margin-bottom: 5%;
+    }
+
+    section{
+        width: 90%;
+        padding: 20px 20px;
+        border-radius: 2px;
+        background-color: whitesmoke;
+    }
+    
+    header{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 90%;
+        padding: 5px 5px;
+        border-radius: 5px;
+        background-color: gray;
+        color: wheat;
+        font-family: 'Sansita Swashed', cursive;
+        font-size: x-large;
+    }
 }
