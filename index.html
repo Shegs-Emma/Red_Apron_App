@@ -16,23 +16,37 @@
             https://firebase.google.com/docs/web/setup#available-libraries -->
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
 
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Dancing+Script:wght@700&family=Sansita+Swashed:wght@800&display=swap&family=Julee" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Cabin|Herr+Von+Muellerhoff|Source+Sans+Pro" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Piazzolla&display=swap&" rel="stylesheet">
+        <!-- bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <!-- font-awesome -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="styles.css">
     </head>
 
-    <body id="main-body">
-        <div id="landing" class="container">
+    <body>
+        <article>
             <div class="row ml-auto mt-3">
-                <a href="./auth/signup.html" class="btn btn-primary ml-auto link">Register</a>
-                <a href="./auth/login.html" class="btn btn-danger ml-3 link">Log In</a>
+                <a href="./auth/signup.html" class="btn btn-primary ml-auto here">Register</a>
+                <a href="./auth/login.html" class="btn btn-danger ml-3 here">Log In</a>
             </div>
-            <div id="landing-logo" class="row">
-                <span class="ml-auto"> RED APRON </span>
+            <div class="text">
+                <h2 class="welcome">Welcome</h2>
+                <h1>RED <strong class="outline">APRON</strong></h1>
+                <div class="arrow">
+                    <span class="left"></span>
+                    <i class="fa fa-asterisk"></i>
+                    <span class="right"></span>
+                </div>
+                <div class="intro">
+                    <h3> Why not</h3>
+                    <h3 class="typing"></h3>
+                </div>
             </div>
-            
-        </div>
+    
+        </article>
         
         
         <!-- ========================================= Firebase configuration ======================================== -->
@@ -62,6 +76,7 @@
         </script>
         <script src="./auth.js"></script>
         <script src="./script.js"></script>
+        <script src="./main.js"></script>
     </body>
 
 </html>

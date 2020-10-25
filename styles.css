@@ -1,27 +1,169 @@
 /* ==========================Landing Page styles========================================= */
-#main-body { 
-    background: url(imgs/sebastien-marchand-NAs5-bHR-JA-unsplash.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+.welcome {
+    font-family: 'Herr Von Muellerhoff', cursive;
+    font-size: 100px;
+    font-weight: normal;
+    margin: 0 0 -55px;
+}
+h1{
+    font-family: "Source Code Pro", sans-serif;
+    font-size: 47px;
+    font-weight: bold;
+    letter-spacing: 9.4px;
+    margin: 0 0 15px;
+}
+
+h3{
+    font-family: 'Dancing Script', cursive;
+}
+
+.here{
+    font-family: 'Piazzolla', serif;
+}
+
+.btn-danger{
+  margin-right: 20px;
+}
+
+.fa-asterisk, .welcome {
+    color: rgb(173, 172, 72);
+}
+
+article .text,.text i {
+    text-align: center;
+}
+article .text, article .text .arrow .left, article .text .arrow .right{
+    position: relative;
+}
+article .text .arrow .left:after, article .text .arrow .right:after{
+    position: absolute;
+}
+
+article .text .arrow .left, article .text .arrow .right{
+    background-color: #fff;
+}
+h1{
+    color:red;
+}
+.outline{
+   color: transparent;
+    -webkit-text-stroke: 2px wheat;
+    opacity: 0.7;
+    font-size: 40px;
+}
+article nav, article .text .arrow .left:after {
+    left: 0;
+}
+article .text .arrow .left:after, article .text .arrow .right:after, article .text span, .arrow-up,  .text i {
+    display: inline-block;
+}
+
+/*Start Header*/
+article {
+    
+      box-sizing: border-box;
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     background-size: cover;
+    overflow: hidden;
+    height: calc(100vh - 1px);
 }
 
-#landing{
-    width: 100%;
+article .text {
+    top: 24%;
+}
+article .text h1 {
+    margin-bottom: 0;
+}
+article .text .arrow .left, article .text .arrow .right {
+    height: 3px;
+    width: 100px;
 }
 
-.link{
-    font-family: 'Julee', cursive;
+article .text .arrow .left {
+    left: -4%;
+}
+article .text .arrow .right {
+    right: -4%;
+}
+article .text .arrow .left:after, article .text .arrow .right:after {
+    content: '';
+    border: 10px solid transparent;
+    border-left-color: #fff;
+    top: -8px;
+}
+article .text .arrow .right:after {
+    right: 0;
+    border-color: transparent #fff transparent transparent;
+}
+article .text .arrow .fa-asterisk {
+    vertical-align: super;
+}
+article .text span {
+    font-family: "Source Code Pro", sans-serif;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+.intro{
+    display: flex;
+    color: wheat;
+    height: 100vh ;
+    margin-left: 40%;
 }
 
-#landing-logo{
-    color: rgb(245, 13, 13);
-    margin-top: 20%;
-    font-size: 500%;
-    font-family: 'Sansita Swashed', cursive;
+.typing{
+    position: relative;
+    margin-left: 10px;
+}
+.typing::after{
+    content:"";
+    position: absolute;
+    right: -5px;
+    width: 1px;
+    height: 4%;
+    border-right: 2px solid red;
+    animation: blink 0.5s infinite ease  ;
+}
+@keyframes blink{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+/*End Header*/
+
+@media (max-width: 1500px) {
+    body {
+        padding: 0;
+    }
+    
+    article {
+        height: calc(100vh - 1px);
+    }
+    .intro{
+        margin-left: 32%;
+     }
+ 
+   
 }
 
+@media (max-width: 576px) {
+     h1 {
+        font-size: 40px;
+    }
+    .welcome {
+        font-size:90px
+    }
+    article {
+        padding: 0;
+    }
+    .intro{
+       margin-left: 2%;
+    }
+
+}
+/*End Home Page Responsive*/
 /* =================================== SignUp and Login Styles ================================== */
 
 body{
@@ -146,6 +288,7 @@ svg{
 }
 
 #ingreCol{
+    background-color: white;
     text-align: center;
     border-radius: 5%;
 }
