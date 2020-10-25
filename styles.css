@@ -299,7 +299,7 @@ svg{
     text-align: center;
 }
 
-#resDesc p, div{
+#resDesc p, .ic{
     text-align: justify;
 }
 
