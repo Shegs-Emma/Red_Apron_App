@@ -87,7 +87,7 @@ $(function () {
                             console.log("Document successfully written!");
                             showAlert("Recipe Submitted Succesfully!", "success", $('#recipes-section'));
 
-                            setTimeout(function(){
+                            setTimeout(function () {
                                 window.location.href = "./recipes.html";
                             }, 4000)
                         }).catch(function (error) {
@@ -145,6 +145,7 @@ $(function () {
             const $prepTime = $('#prepTime').val();
             const $cookTime = $('#cookTime').val();
             const $servings = $('#serve').val();
+
 
             let recipeDescr = {
                 recipeName: $recipeName,
@@ -312,9 +313,9 @@ $(function () {
 
     // =========================================================== All About Showing Alerts =====================================
     // The show alert function
-    function showAlert(message, className, location){
+    function showAlert(message, className, location) {
         let $alertDiv = $('<div>');
-        $alertDiv.addClass('alert alert-'+className);
+        $alertDiv.addClass('alert alert-' + className);
         $alertDiv.append(document.createTextNode(message));
 
         let $add = location;
@@ -325,4 +326,5 @@ $(function () {
         setTimeout(() => $('.alert').remove(), 3000);
     };
 
+    // ======================================================= Check Image Validity ===========================================
 });

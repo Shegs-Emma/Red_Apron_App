@@ -76,7 +76,11 @@ $(function () {
         });
         $mainDiv.addClass('card mt-3');
 
-        var $image = $('<img>');
+        var $image = $('<img>', {
+            css: {
+                height: '250px'
+            }
+        });
         $image.attr('src', description.recipeImgAddr);
         $image.addClass('card-img-top');
 
