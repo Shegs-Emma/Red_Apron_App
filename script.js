@@ -333,7 +333,7 @@ $(function () {
 
         let $add = location;
 
-        $add.prepend($alertDiv);
+        $add.append($alertDiv);
 
         // Disappear in 2 seconds
         setTimeout(() => $('.alert').remove(), 3000);
