@@ -146,32 +146,45 @@ $(function () {
             const $cookTime = $('#cookTime').val();
             const $servings = $('#serve').val();
 
+            var imageValid = imageChecker($recipeImageAddress);
+            
 
-            let recipeDescr = {
-                recipeName: $recipeName,
-                recipeImgAddr: $recipeImageAddress,
-                recipeDes: $recipeDescription,
-                prepTime: $prepTime,
-                cookTime: $cookTime,
-                serve: $servings
-            };
+            if ($prepTime >= 1 && $cookTime >= 1 && $servings >= 1 && imageValid) {
+                let recipeDescr = {
+                    recipeName: $recipeName,
+                    recipeImgAddr: $recipeImageAddress,
+                    recipeDes: $recipeDescription,
+                    prepTime: $prepTime,
+                    cookTime: $cookTime,
+                    serve: $servings
+                };
 
-            UI.fillRecipe(recipeDescr, 'desc');
+                UI.fillRecipe(recipeDescr, 'desc');
 
-            $('#recipeName').val('');
-            $('#recipeImage').val('');
-            $('#recipeDesc').val('');
-            $('#prepTime').val('');
-            $('#cookTime').val('');
-            $('#serve').val('');
+                $('#recipeName').val('');
+                $('#recipeImage').val('');
+                $('#recipeDesc').val('');
+                $('#prepTime').val('');
+                $('#cookTime').val('');
+                $('#serve').val('');
 
-            $('#addDesc').attr('disabled', true);
+                $('#addDesc').attr('disabled', true);
 
-            const $section = $('#right-section');
-            $section.empty();
-            showAlert("Recipe Description Saved!", "success", $('#recipes-section'));
+                const $section = $('#right-section');
+                $section.empty();
+                showAlert("Recipe Description Saved!", "success", $('#recipes-section'));
 
-            $('#addIngr').attr('disabled', false);
+                $('#addIngr').attr('disabled', false);
+            } else if ($prepTime <= 0) {
+                showAlert("Minutes To Prepare must be greater than 0!", "danger", $('#recipes-section'));
+            } else if ($cookTime <= 0) {
+                showAlert("Minutes To Prepare must be greater than 0!", "danger", $('#recipes-section'));
+            } else if ($servings <= 0) {
+                showAlert("Number of Servings must be greater than 0!", "danger", $('#recipes-section'));
+            } else if (!imageValid){
+                showAlert("Image URL is inValid!", "danger", $('#recipes-section'));
+            }
+
         });
     });
 
@@ -327,4 +340,13 @@ $(function () {
     };
 
     // ======================================================= Check Image Validity ===========================================
+    function imageChecker(src) {
+        var image = new Image();
+        image.src = src;
+        if (image.width == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 });
